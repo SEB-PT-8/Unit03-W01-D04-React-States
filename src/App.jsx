@@ -25,6 +25,8 @@ function App() {
         },
       ])
 
+    const [deletedStudents, setDeletedStudents] = useState([])
+
 
   function handleIncrease(){
     setCount(count + 1)
@@ -62,6 +64,7 @@ function App() {
     }
 
     setStudents(filteredStudents)
+    setDeletedStudents([...deletedStudents, studentToBeDeleted])
   }
   return (
     <>
