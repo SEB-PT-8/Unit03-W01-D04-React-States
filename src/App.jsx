@@ -1,7 +1,10 @@
 import { useState } from "react"
 function App() {
   
-  const allStudents = [
+
+  //    [state, updater function] = useState(initial value)
+  const [count, setCount] = useState(0)
+  const [students,setStudents] = useState([
         {
           id:1,
           studentName: "Ali",
@@ -20,10 +23,7 @@ function App() {
           grade: 100,
           city:"Manama3"
         },
-      ]
-  //    [state, updater function] = useState(initial value)
-  const [count, setCount] = useState(0)
-  const [students,setStudents] = useState(allStudents)
+      ])
 
 
   function handleIncrease(){
@@ -50,6 +50,19 @@ function App() {
   // 4. BONUS BONUS: add a reset button that should reset the count to 0
 
   console.log("Component loads")
+
+  function removeStudent(studentToBeDeleted){
+    console.log(studentToBeDeleted)
+
+    const filteredStudents = []
+    for(let oneStudent of students){
+      if(oneStudent.id !== studentToBeDeleted.id){
+        filteredStudents.push(oneStudent)
+      }
+    }
+
+    setStudents(filteredStudents)
+  }
   return (
     <>
     <p>{count}</p>
@@ -58,11 +71,11 @@ function App() {
     <button onClick={handleReset}>reset</button>
 
     {students.map((oneStudent)=>
-    <div>
+    <div key={oneStudent.id}>
       <p>Name: {oneStudent.studentName}</p>
       <p>grade: {oneStudent.grade}</p>
       <p>city: {oneStudent.city}</p>
-      <button>Remove student</button>
+      <button onClick={()=>{removeStudent(oneStudent)}}>Remove student</button>
     </div>
     )}
     </>
